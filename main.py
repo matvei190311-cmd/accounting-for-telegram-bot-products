@@ -5,18 +5,22 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from config import BOT_TOKEN
 from database import Database
 from handlers import register_all_handlers
+from utils import load_all_locales  # Добавляем импорт
 
 
 async def main():
-    # Инициализация БД (без удаления старой базы)
+    # Загружаем все локализации при запуске
+    load_all_locales()
+
+    # Инициализация БД
     db = Database('sqlite:///bot.db')
 
     # Инициализируем таблицы если их нет
     try:
         db.init_db()
-        print("✅ База данных готова")
+        print("✅ Database ready")
     except Exception as e:
-        print(f"❌ Ошибка инициализации базы данных: {e}")
+        print(f"❌ Database initialization error: {e}")
         return
 
     # Бот
@@ -25,8 +29,8 @@ async def main():
 
     # Регистрация обработчиков
     register_all_handlers(dp)
-    print("✅ Обработчики зарегистрированы")
-    print("🤖 Бот запущен!")
+    print("✅ Handlers registered")
+    print("🤖 Bot started!")
 
     await dp.start_polling()
 

@@ -7,19 +7,19 @@ db = Database('sqlite:///bot.db')
 
 
 def get_transaction_type_text(transaction_type):
-    """Возвращает текст для типа операции"""
+    """Возвращает текст для типа операции / Returns text for operation type"""
     type_map = {
-        'give': 'Отдача товара',
-        'return': 'Возврат товара',
-        'sale': 'Продажа товара',
-        'take': 'Забор товара',
-        'transfer': 'Перемещение товара'
+        'give': 'Product Give',
+        'return': 'Product Return',
+        'sale': 'Product Sale',
+        'take': 'Product Take',
+        'transfer': 'Product Transfer'
     }
-    return type_map.get(transaction_type, 'Неизвестная операция')
+    return type_map.get(transaction_type, 'Unknown Operation')
 
 
 def export_operations_to_csv(start_date=None, end_date=None):
-    """Экспорт операций в CSV"""
+    """Экспорт операций в CSV / Export operations to CSV"""
     session = db.get_session()
 
     try:
@@ -36,14 +36,14 @@ def export_operations_to_csv(start_date=None, end_date=None):
         writer = csv.writer(output)
 
         writer.writerow([
-            'Дата и время',
-            'Тип операции',
-            'SKU товара',
-            'Название товара',
-            'Количество',
-            'Витрина-отправитель',
-            'Витрина-получатель',
-            'Статус'
+            'Date and Time',
+            'Operation Type',
+            'Product SKU',
+            'Product Name',
+            'Quantity',
+            'Sender Showcase',
+            'Receiver Showcase',
+            'Status'
         ])
 
         for transaction in transactions:
@@ -65,7 +65,7 @@ def export_operations_to_csv(start_date=None, end_date=None):
         return output.getvalue()
 
     except Exception as e:
-        print(f"❌ Ошибка экспорта в CSV: {e}")
+        print(f"❌ CSV export error: {e}")
         return None
     finally:
         session.close()
