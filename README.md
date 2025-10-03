@@ -44,7 +44,7 @@ Multi-language Telegram bot for managing products, showcases, and product operat
 
 ### 1. Клонирование репозитория / Clone repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/matvei190311-cmd/accounting-for-telegram-bot-products
 cd <project-folder>
 ```
 
