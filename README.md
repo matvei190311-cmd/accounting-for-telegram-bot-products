@@ -30,7 +30,7 @@
 
 ### 1. Клонирование репозитория
 ```bash
-git clone <repository-url>
+git clone https://github.com/matvei190311-cmd/accounting-for-telegram-bot-products
 cd <project-folder>
 ```
 
